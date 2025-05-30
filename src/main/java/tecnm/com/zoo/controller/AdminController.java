@@ -57,7 +57,7 @@ public class AdminController {
 			model.addAttribute("usuario", "Invitado");
 			model.addAttribute("rol", "ROLE_ANONYMOUS");
 		}
-		return "/admin/inicioadmin";
+		return "admin/inicioadmin";
 	}
 
 	@GetMapping("/usuariosadmin")
