@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/10579/10579785.png">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+	<title>ZooKora | Hábitats</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Winky Rough", 'Segoe UI';
+		}
+
+		.fondo {
+			position: relative;
+			width: 100%;
+			height: 250px;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.fondo img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		.titulo-contenedor {
+			position: absolute;
+			background-color: #ad3bca;
+			padding: 10px 20px;
+			text-align: center;
+		}
+
+		.titulo-contenedor h1 {
+			font-size: 3rem;
+			font-family: 'Denk One', 'Segoe UI';
+			color: #FFFFFF;
+		}
+
+		.buscador {
+			margin: 30px auto 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.buscador input[type="text"] {
+			padding: 10px 15px;
+			width: 300px;
+			border-radius: 20px;
+			border: 2px solid #8f1d8f;
+			font-size: 1rem;
+			outline: none;
+			transition: 0.3s ease;
+		}
+
+		.buscador input[type="text"]:focus {
+			box-shadow: 0 0 5px #821f96;
+		}
+
+		.input-contenedor {
+			position: relative;
+			display: inline-block;
+		}
+
+		.input-contenedor i {
+			position: absolute;
+			left: 15px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: rgb(228, 141, 221);
+			font-size: 1rem;
+		}
+
+		.input-contenedor input[type="text"] {
+			padding: 10px 15px 10px 40px;
+			width: 300px;
+			border-radius: 20px;
+			border: 2px solid #7b2aa0;
+			font-size: 1rem;
+			outline: none;
+			transition: 0.3s ease;
+		}
+
+		.habitat-contenedor {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 30px;
+			padding: 30px;
+		}
+
+		.habitat-card {
+			width: 180px;
+			border-radius: 5px;
+			overflow: hidden;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+			background-color: #ffffff;
+			transition: transform 0.3s ease;
+		}
+
+		.habitat-card:hover {
+			transform: scale(1.05);
+		}
+
+		.habitat-card img {
+			width: 100%;
+			height: 220px;
+			object-fit: cover;
+		}
+
+		.habitat-categoria {
+			text-align: center;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: #ffffff;
+			padding: 10px 0;
+			font-size: 1.2rem;
+			font-family: 'Outfit', sans-serif;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:insert="fragments/menu::menu-principal" class="sidebar"></div>
+
+	<div class="fondo">
+		<img src="https://www.revistaoxigeno.es/uploads/s1/12/21/95/65/marita-kavelashvili-ugnrxk1129g-unsplash.jpeg"
+			alt="fondo">
+		<div class="titulo-contenedor">
+			<h1>HABITATS</h1>
+		</div>
+	</div>
+
+	<form action="/buscarHabitat" method="get">
+		<div class="buscador">
+			<div class="input-contenedor" style="display: flex; align-items: center;">
+				<button type="submit"
+					style="background: none; border: none; cursor: pointer; padding: 0; margin-right: 5px;">
+					<i class="fas fa-search"></i>
+				</button>
+				<input type="text" name="nombre" placeholder="Buscar habitat...🐾"
+					style="font-family: 'Segoe UI', sans-serif;">
+			</div>
+		</div>
+	</form>
+
+	<div class="habitat-contenedor">
+		<div th:each="habitat : ${habitats}" class="habitat-card">
+			<img th:src="@{/imagenes/{imagen}(imagen=${habitat.imagen})}" alt="Habitat">
+			<div class="habitat-categoria" style="background-color: #bd4535;" th:text="${habitat.nombre}">Nombre</div>
+		</div>
+	</div>
+
+	<footer th:insert="fragments/footer::pie-pagina"></footer>
+
+</body>
+
+</html>

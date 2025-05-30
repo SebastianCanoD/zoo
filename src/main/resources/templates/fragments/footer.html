@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+	rel="stylesheet">
+<title>Footer</title>
+</head>
+<body>
+	<div th:fragment="pie-pagina">
+		<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Winky Rough", 'Segoe UI';
+}
+
+.footer {
+	background-color: #4b2e19;
+	/* café oscuro */
+	color: #fff;
+	padding: 40px 20px 20px;
+	font-family: 'Outfit', sans-serif;
+}
+
+.footer-container {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	gap: 30px;
+	margin-bottom: 30px;
+}
+
+.footer-col {
+	min-width: 200px;
+}
+
+.footer-col h3 {
+	color: #fcb54b;
+	/* naranja */
+	margin-bottom: 15px;
+	font-size: 1.3rem;
+}
+
+.footer-col ul, .footer-col p {
+	list-style: none;
+	padding: 0;
+	margin: 5px 0;
+	font-size: 0.95rem;
+}
+
+.footer-col a {
+	color: #fff;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.footer-col a:hover {
+	color: #fcb54b;
+}
+
+.footer-contacto {
+	text-align: center;
+	border-top: 1px solid #fcb54b;
+	padding-top: 15px;
+	font-size: 1rem;
+}
+
+.pasto {
+	width: 100%;
+	height: 20px;
+	background: linear-gradient(to bottom, #1e7e34 0%, #388e3c 50%, #1e7e34 100%)
+}
+</style>
+		<div class="pasto"></div>
+
+		<footer class="footer">
+			<div class="footer-container">
+				<!-- Columna 1 -->
+				<div class="footer-col">
+					<h3>Menú</h3>
+					<ul>
+						<li><a href="/inicio">Inicio</a></li>
+						<li><a href="/animales">Animales</a></li>
+						<li><a href="/habitats">Habitats</a></li>
+						<li><a href="/especies">Especies</a></li>
+						<li><a href="/cuidadores">Cuidadores</a></li>
+						<li><a href="/mapa">Mapa</a></li>
+					</ul>
+				</div>
+
+				<!-- Columna 2 -->
+				<div class="footer-col">
+					<h3>Horario</h3>
+					<ul>
+						<li>Jueves: 9 a.m.–4 p.m.</li>
+						<li>Viernes: 9 a.m.–4 p.m.</li>
+						<li>Sábado: 9 a.m.–4 p.m.</li>
+						<li>Domingo: 9 a.m.–4 p.m.</li>
+						<li>Lunes: Cerrado</li>
+						<li>Martes: 9 a.m.–4 p.m.</li>
+						<li>Miércoles: 9 a.m.–4 p.m.</li>
+					</ul>
+				</div>
+
+				<!-- Columna 3 -->
+				<div class="footer-col">
+					<h3>Dirección</h3>
+					<p>Sta. Cruz, Jose Lopez Portillo</p>
+					<p>39074 Chilpancingo de los Bravo, Gro.</p>
+				</div>
+
+				<!-- Columna 4 -->
+				<div class="footer-col">
+					<h3>Proyecto por:</h3>
+					<p>Perla Corazón García Robles</p>
+					<p>Ingeniería en Sistemas Computacionales</p>
+					<p>Temas Selectos de Programación Web</p>
+				</div>
+			</div>
+
+
+			<div class="footer-contacto">
+				<p>
+					<strong>Escríbenos... ✍🏻</strong> <a
+						href="mailto:corazong986@gmail.com"
+						style="color: #fdd395; text-decoration: none;">
+						corazong986@gmail.com </a>
+				</p>
+				<p>
+					<strong>Llámanos... 📞</strong> <a
+						href="https://wa.me/527471080710" target="_blank"
+						style="color: #fdd395; text-decoration: none;"> 7471080710 </a>
+				</p>
+			</div>
+	</div>
+</body>
+</html>

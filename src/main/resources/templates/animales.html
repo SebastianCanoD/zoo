@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/1183/1183403.png">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+	<title>ZooKora | Animales</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Winky Rough", 'Segoe UI';
+		}
+
+		.fondo {
+			position: relative;
+			width: 100%;
+			height: 250px;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.fondo img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		.titulo-contenedor {
+			position: absolute;
+			background-color: #fcb54b;
+			padding: 10px 20px;
+			text-align: center;
+		}
+
+		.titulo-contenedor h1 {
+			font-size: 3rem;
+			font-family: 'Denk One', 'Segoe UI';
+			color: #FFFFFF;
+		}
+
+		.buscador {
+			margin: 15px auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+
+		.buscador input[type="text"] {
+			padding: 10px 15px;
+			width: 300px;
+			border-radius: 20px;
+			border: 2px solid #fcb54b;
+			font-size: 1rem;
+			outline: none;
+			transition: 0.3s ease;
+		}
+
+		.buscador input[type="text"]:focus {
+			box-shadow: 0 0 5px #fcb54b;
+		}
+
+		.input-contenedor {
+			position: relative;
+			display: inline-block;
+		}
+
+		.input-contenedor i {
+			position: absolute;
+			left: 15px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: orange;
+			font-size: 1rem;
+		}
+
+		.input-contenedor input[type="text"] {
+			padding: 10px 15px 10px 40px;
+			width: 300px;
+			border-radius: 20px;
+			border: 2px solid #fcb54b;
+			font-size: 1rem;
+			outline: none;
+			transition: 0.3s ease;
+		}
+
+		.galeria {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+			padding: 20px;
+		}
+
+		.animal-card {
+			width: 250px;
+			background-color: #f9f9f9;
+			border: 2px solid #5a3907;
+			border-radius: 15px;
+			text-align: center;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			padding: 15px;
+			transition: transform 0.3s;
+		}
+
+		.animal-card:hover {
+			transform: scale(1.05);
+		}
+
+		.animal-card .nombre {
+			font-size: 1.5rem;
+			color: #000;
+			margin-bottom: 10px;
+			font-family: 'Outfit', sans-serif;
+		}
+
+		.animal-card img {
+			width: 100%;
+			height: 180px;
+			object-fit: cover;
+			border-radius: 10px;
+			margin-bottom: 10px;
+		}
+
+		.info-btn {
+			background-color: #fcb54b;
+			color: white;
+			border: none;
+			padding: 10px 15px;
+			border-radius: 20px;
+			font-size: 1rem;
+			cursor: pointer;
+			font-family: 'Outfit', sans-serif;
+		}
+
+		.info-btn:hover {
+			background-color: #e39a20;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:insert="fragments/menu::menu-principal" class="sidebar"></div>
+
+	<div class="fondo">
+		<img src="https://wwflac.awsassets.panda.org/img/jaguar-i25a-santiago-gibert_790853.jpg" alt="fondo">
+		<div class="titulo-contenedor">
+			<h1>LISTA DE ANIMALES</h1>
+		</div>
+	</div>
+
+	<form action="/buscar" method="get">
+		<div class="buscador">
+			<div class="input-contenedor" style="display: flex; align-items: center;">
+				<button type="submit"
+					style="background: none; border: none; cursor: pointer; padding: 0; margin-right: 5px;">
+					<i class="fas fa-search"></i>
+				</button>
+				<input type="text" name="nombre" placeholder="Buscar animal...🦁"
+					style="font-family: 'Segoe UI', sans-serif;">
+			</div>
+		</div>
+	</form>
+
+	<div class="galeria">
+		<div class="animal-card" th:each="animal : ${animales}">
+			<img th:src="@{/imagenes/{imagen}(imagen=${animal.imagen})}" alt="Animal"
+				style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+			<h2 class="nombre" th:text="${animal.nombre}">Nombre del Animal</h2>
+			<a th:href="@{/detalleanimal/{id}(id=${animal.id_animal})}">
+				<button class="info-btn">VER INFORMACIÓN</button>
+			</a>
+		</div>
+	</div>
+
+	<footer th:insert="fragments/footer::pie-pagina"></footer>
+
+</body>
+
+</html>

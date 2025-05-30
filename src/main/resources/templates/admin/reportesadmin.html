@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/2586/2586859.png">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Anton&family=Cal+Sans&family=Denk+One&family=Honk&family=Luckiest+Guy&family=NTR&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+	<title>Reportes | Zookora</title>
+	<style>
+		body {
+			background-color: #f5f1e3;
+			font-family: 'Outfit', sans-serif;
+		}
+
+		.sidebar {
+			height: 100vh;
+			min-height: 100vh;
+			background-color: #2f5233;
+			color: white;
+			padding-top: 20px;
+			position: fixed;
+		}
+
+		.sidebar a {
+			color: white;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			padding: 15px;
+			font-size: 18px;
+			transition: background-color 0.3s;
+		}
+
+		.sidebar a i {
+			margin-right: 10px;
+		}
+
+		.sidebar a:hover {
+			background-color: #3e7042;
+		}
+
+		.content {
+			padding: 30px;
+			margin-left: 245px;
+			position: relative;
+			z-index: 1;
+		}
+
+		main>* {
+			position: relative;
+			z-index: 1;
+		}
+
+		.table {
+			background-color: white;
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.table th,
+		.table td {
+			text-align: center;
+		}
+
+		.subtitulo {
+			color: #2f5233;
+			font-family: "Winky Rough";
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- Sidebar -->
+			<nav class="col-md-2 sidebar d-flex flex-column justify-content-between">
+				<div>
+					<h3 class="text-center">🌿ZooKora 🐾</h3>
+					<hr>
+					<a href="/admin/inicioadmin"><i class="bi bi-house-door"></i> Inicio</a>
+					<a href="/admin/usuariosadmin"><i class="bi bi-person-circle"></i> Usuarios</a>
+					<a href="/admin/reportesadmin"><i class="bi bi-file-earmark-text"></i> Reportes</a>
+				</div>
+				<div class="text-center mb-2 text-white">
+					<small><i class="bi bi-person-circle"></i> <strong th:text="${usuario}">Nombre
+							Usuario</strong></small><br>
+					<small><i class="bi bi-shield-lock"></i> <span th:text="${rol}">Rol Usuario</span></small>
+				</div>
+				<!-- Botón Cerrar Sesión -->
+				<div class="text-center mb-3">
+					<a th:href="@{/logout}" class="btn btn-light text-dark"><i class="bi bi-box-arrow-right"></i> Cerrar
+						Sesión</a>
+				</div>
+			</nav>
+
+			<!-- Contenido principal -->
+			<!-- Contenido principal -->
+			<main class="col-md-10 content">
+				<h1 style="font-family: Cal Sans; font-size: 45px;" class="mb-4">| Consultar Reportes 📄</h1>
+				<br />
+
+				<!-- Reporte de Salud -->
+				<div class="d-flex justify-content-between align-items-center mb-2">
+					<h3 class="subtitulo mb-0">| Reporte de Salud 🐾</h3>
+					<button class="btn btn-warning" onclick="downloadPDF('saludTable', 'Reporte de Salud')">
+						<i class="bi bi-download me-1"></i> PDF
+					</button>
+				</div>
+
+				<div class="table-responsive mb-4">
+					<table id="saludTable" class="table table-striped">
+						<thead class="table-success">
+							<tr>
+								<th scope="col">Fecha</th>
+								<th scope="col">Animal</th>
+								<th scope="col">Cuidador</th>
+								<th scope="col">Estado de Salud</th>
+								<th scope="col">Observaciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="salud : ${saludList}">
+								<td th:text="${salud.fecha}"></td>
+								<td th:text="${salud.animales.nombre}"></td>
+								<td th:text="${salud.cuidadores.nombre}"></td>
+								<td th:text="${salud.estado}"></td>
+								<td th:text="${salud.descripcion}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Reporte de Alimentación -->
+				<div class="d-flex justify-content-between align-items-center mb-2">
+					<h3 class="subtitulo mb-0">| Reporte de Alimentación 🥗</h3>
+					<button class="btn btn-warning"
+						onclick="downloadPDF('alimentacionTable', 'Reporte de Alimentación')">
+						<i class="bi bi-download me-1"></i> PDF
+					</button>
+				</div>
+
+				<div class="table-responsive mb-4">
+					<table id="alimentacionTable" class="table table-striped">
+						<thead class="table-info">
+							<tr>
+								<th scope="col">Fecha</th>
+								<th scope="col">Animal</th>
+								<th scope="col">Tipo de Alimento</th>
+								<th scope="col">Cantidad</th>
+								<th scope="col">Observaciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="alim : ${alimentacionList}">
+								<td th:text="${alim.fecha}"></td>
+								<td th:text="${alim.animales.nombre}"></td>
+								<td th:text="${alim.tipo_alimento}"></td>
+								<td th:text="${alim.cantidad}"></td>
+								<td th:text="${alim.observaciones}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+		</div>
+		</main>
+	</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+	<script>
+		function downloadPDF(tableId, reportTitle, userName = "Usuario Desconocido") {
+			const {jsPDF} = window.jspdf;
+			const doc = new jsPDF();
+
+			// Título del zoológico - centrado y en negrita
+			doc.setFontSize(32);
+			doc.setTextColor('#1E3A8A');
+			doc.setFont("helvetica", "bold");
+			const zooTitle = "Zookora";
+			const pageWidth = doc.internal.pageSize.getWidth();
+			const titleWidth = doc.getTextWidth(zooTitle);
+			doc.text(zooTitle, (pageWidth - titleWidth) / 2, 20);
+
+			// Nombre del usuario
+			doc.setFontSize(12);
+			doc.setTextColor(0, 0, 0);
+			doc.setFont("helvetica", "normal");
+			doc.text(`Generado por: ${userName}`, 14, 30);
+
+			// Título del reporte
+			doc.setFontSize(16);
+			doc.setFont("helvetica", "bold");
+			doc.setTextColor(47, 82, 51); // Verde sidebar
+			doc.text(reportTitle, 14, 40);
+
+			// Extraer tabla con autoTable - con estilo
+			doc.autoTable({
+				html: `#${tableId}`,
+				startY: 50,
+				theme: 'grid',
+				headStyles: {
+					fillColor: [47, 82, 51], // verde sidebar
+					textColor: 255,
+					fontStyle: 'bold',
+					halign: 'center',
+				},
+				bodyStyles: {
+					halign: 'center',
+					fontSize: 10,
+				},
+				alternateRowStyles: {
+					fillColor: [220, 240, 220], // color verde muy claro para filas alternas
+				},
+				margin: {left: 14, right: 14},
+				styles: {
+					overflow: 'linebreak',
+					cellPadding: 3,
+					font: 'helvetica',
+				}
+			});
+
+			doc.save(`${reportTitle.replace(/\s+/g, '_')}.pdf`);
+		}
+
+	</script>
+</body>
+
+</html>

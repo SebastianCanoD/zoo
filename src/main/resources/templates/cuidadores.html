@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/3835/3835729.png">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+	<title>ZooKora | Cuidadores</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Winky Rough", 'Segoe UI';
+		}
+
+		body {
+			background-color: #f5f5f5;
+		}
+
+		.fondo {
+			position: relative;
+			width: 100%;
+			height: 300px;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.fondo img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		.titulo-contenedor {
+			position: absolute;
+			background-color: #4b49ac;
+			padding: 10px 20px;
+			text-align: center;
+		}
+
+		.titulo-contenedor h1 {
+			font-size: 3rem;
+			font-family: 'Denk One', 'Segoe UI';
+			color: #FFFFFF;
+		}
+
+		.input-contenedor {
+			position: relative;
+			display: inline-block;
+		}
+
+		.input-contenedor i {
+			position: absolute;
+			left: 15px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: rgb(141, 228, 141);
+			font-size: 1rem;
+		}
+
+		.input-contenedor input[type="text"] {
+			padding: 10px 15px 10px 40px;
+			width: 300px;
+			border-radius: 20px;
+			border: 2px solid #2aa02a;
+			font-size: 1rem;
+			outline: none;
+			transition: 0.3s ease;
+		}
+
+		/* Estilos para la sección de cuidadores */
+		.cuidadores-container {
+			max-width: 1200px;
+			margin: 40px auto;
+			padding: 0 20px;
+		}
+
+		.cuidadores-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 30px;
+			margin-top: 30px;
+		}
+
+		.cuidador-card {
+			background-color: white;
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.cuidador-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+		}
+
+		.cuidador-img {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 5px solid #4b49ac;
+			margin: 20px auto;
+			display: block;
+		}
+
+		.cuidador-info {
+			padding: 20px;
+			text-align: center;
+		}
+
+		.cuidador-nombre {
+			font-size: 1.5rem;
+			color: #4b49ac;
+			margin-bottom: 10px;
+			font-family: 'Denk One', sans-serif;
+		}
+
+		.cuidador-cargo {
+			font-size: 1.1rem;
+			color: #fcb54b;
+			margin-bottom: 15px;
+			font-weight: bold;
+		}
+
+		.cuidador-datos {
+			margin-bottom: 15px;
+			text-align: left;
+		}
+
+		.cuidador-datos p {
+			margin-bottom: 8px;
+			display: flex;
+			align-items: center;
+		}
+
+		.cuidador-datos i {
+			margin-right: 10px;
+			color: #4b49ac;
+			width: 20px;
+			text-align: center;
+		}
+
+		.cuidador-anios {
+			background-color: #4b49ac;
+			color: white;
+			padding: 5px 15px;
+			border-radius: 20px;
+			display: inline-block;
+			font-size: 0.9rem;
+		}
+
+		.section-title {
+			text-align: center;
+			font-size: 2rem;
+			color: #4b49ac;
+			margin-bottom: 20px;
+			font-family: 'Denk One', sans-serif;
+		}
+
+		.section-subtitle {
+			text-align: center;
+			color: #666;
+			max-width: 700px;
+			margin: 0 auto 30px;
+			font-size: 1.1rem;
+			line-height: 1.6;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:insert="fragments/menu::menu-principal" class="sidebar"></div>
+
+	<div class="fondo">
+		<img src="https://wiikon.es/wp-content/uploads/2023/10/Portada_ZOO.png.webp" alt="fondo">
+		<div class="titulo-contenedor">
+			<h1>CUIDADORES</h1>
+		</div>
+	</div>
+
+	<div class="cuidadores-container">
+		<h2 class="section-title">Nuestro Equipo de Cuidadores</h2>
+		<p class="section-subtitle">Los cuidadores de ZooKora 👥 son profesionales apasionados por el bienestar animal,
+			con años de experiencia y formación especializada en diferentes especies.</p>
+
+
+		<div class="cuidadores-grid">
+			<div class="cuidador-card" th:each="cuidador : ${cuidadores}">
+				<img th:src="@{/imagenes/{imagen}(imagen=${cuidador.imagen})}" class="cuidador-img"
+					alt="Foto del cuidador" onerror="this.src='https://via.placeholder.com/150?text=Sin+imagen'">
+				<div class="cuidador-info">
+					<h3 class="cuidador-nombre" th:text="${cuidador.nombre}">Nombre</h3>
+					<div class="cuidador-datos">
+						<p><i class="fas fa-envelope"></i> <span th:text="${cuidador.correo}">Email</span></p>
+						<p><i class="fas fa-phone"></i> <span th:text="${cuidador.telefono}">Teléfono</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:insert="fragments/footer::pie-pagina"></footer>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hábitats | Zookora</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/8452/8452404.png">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Anton&family=Cal+Sans&family=Denk+One&family=Honk&family=Luckiest+Guy&family=NTR&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+	<style>
+		body {
+			background-color: #f5f1e3;
+			font-family: 'Outfit', sans-serif;
+		}
+
+		.sidebar {
+			height: 100vh;
+			background-color: #2f5233;
+			color: white;
+			padding-top: 20px;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 220px;
+		}
+
+		.sidebar a {
+			color: white;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			padding: 15px;
+			font-size: 18px;
+			transition: background-color 0.3s;
+		}
+
+		.sidebar a i {
+			margin-right: 10px;
+		}
+
+		.sidebar a:hover {
+			background-color: #3e7042;
+		}
+
+		.content {
+			margin-left: 215px;
+			padding: 30px;
+			position: relative;
+			z-index: 1;
+		}
+
+		.card {
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 15px;
+		}
+
+		.table-container {
+			margin-bottom: 40px;
+		}
+
+		.form-container {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 30px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.form-label {
+			font-weight: bold;
+			font-size: 17px;
+			font-family: "National Park", 'Segoe UI';
+			color: #2f5233;
+		}
+
+		.image-upload {
+			background-color: #e8f5e9;
+			border-radius: 10px;
+			padding: 15px;
+			display: flex;
+			justify-content: center;
+			margin-bottom: 1.5rem;
+			border: 2px dashed #4caf50;
+		}
+
+		.image-upload input[type="file"] {
+			font-size: 16px;
+		}
+
+		.image-upload label {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			font-size: 16px;
+			font-weight: bold;
+			color: #4caf50;
+			cursor: pointer;
+		}
+
+		.image-upload label i {
+			font-size: 24px;
+			margin-bottom: 5px;
+		}
+
+		.image-upload input[type="file"]:focus {
+			outline: none;
+			border-color: #4caf50;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar -->
+			<nav class="col-md-2 sidebar d-flex flex-column justify-content-between">
+				<div>
+					<h3 class="text-center">🌿ZooKora 🐾</h3>
+					<hr>
+					<a href="/cuidadores/iniciocuidador"><i class="bi bi-house-door"></i> Inicio</a>
+					<a href="/cuidadores/animalescuidador"><i class="bi bi-bug"></i> Animales</a>
+					<a href="/cuidadores/especiescuidador"><i class="bi bi-file-earmark-person"></i> Especies</a>
+					<a href="/cuidadores/habitatscuidador"><i class="bi bi-tree"></i> Hábitats</a>
+					<a href="/cuidadores/alimentacioncuidador"><i class="bi bi-cup"></i> Alimentación</a>
+					<a href="/cuidadores/saludcuidador"><i class="bi bi-heart-pulse"></i> Salud</a>
+				</div>
+				<div class="text-center mb-2 text-white">
+				    <small><i class="bi bi-person-circle"></i> <strong th:text="${usuario}">Nombre Usuario</strong></small><br>
+				    <small><i class="bi bi-shield-lock"></i> <span th:text="${rol}">Rol Usuario</span></small>
+				</div>
+				<div class="text-center mb-3">
+					<a th:href="@{/logout}" class="btn btn-light text-dark"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a>
+				</div>
+			</nav>
+
+			<!-- Contenido principal -->
+			<main class="col-md-10 content">
+				<h1 class="mb-4" style="font-family: Cal Sans; font-size: 45px;">| Administrar Hábitats 🌎🌳</h1>
+
+				<!-- Tabla de Hábitats Registrados -->
+				<div class="table-container">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Continente</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="tablaHabitats">
+							<tr th:each="habitat : ${habitats}">
+								<td th:text="${habitat.id_habitat}"></td>
+								<td th:text="${habitat.nombre}"></td>
+								<td th:text="${habitat.continente}"></td>
+								<td>
+									<button class="btn btn-warning btn-sm">
+										<i class="bi bi-pencil-fill"></i> <!-- Ícono de lápiz -->
+									</button>
+									<button class="btn btn-danger btn-sm ms-2">
+										<i class="bi bi-trash-fill"></i> <!-- Ícono de basura -->
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Formulario de Modificación de Hábitat -->
+				<div class="form-container">
+					<h3 class="mb-4" style="font-weight: bold;">Modificar Hábitat</h3>
+					<form id="formModificarHabitat" th:action="@{/cuidadores/agregarhabitat}" method="post" th:object="${habitats}">
+					    
+						<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+						    <ul>
+						        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+						    </ul>
+						</div>
+
+						<div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>
+						<div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
+						<div class="mb-3">
+							<label for="nombre" class="form-label">| Nombre del Hábitat: 🌿</label>
+							<input type="text" class="form-control" id="nombre" name="nombre" required>
+						</div>
+						<div class="mb-3">
+							<label for="continente" class="form-label">| Continente: 🌍</label>
+							<input type="text" class="form-control" id="continente" name="continente" required>
+						</div>
+						<!--						<div class="image-upload mb-3">-->
+						<!--						    <label for="imagen"><i class="bi bi-camera-fill"></i> Subir Imagen</label>-->
+						<!--						    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>-->
+						<!--						</div>-->
+						<button type="submit" class="btn btn-success" name="accion" value="agregar">Agregar</button>
+						<button type="submit" class="btn btn-warning" name="accion" value="modificar"
+							disabled>Modificar</button>
+						<button type="submit" class="btn btn-danger" name="accion" value="eliminar"
+							disabled>Eliminar</button>
+					</form>
+				</div>
+			</main>
+		</div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+		    const form = document.getElementById('formModificarHabitat');
+		    const btnAgregar = document.querySelector('button.btn-success[name="accion"][value="agregar"]');
+		    const btnModificar = document.querySelector('button.btn-warning[name="accion"][value="modificar"]');
+		    const btnEliminar = document.querySelector('button.btn-danger[name="accion"][value="eliminar"]');
+		    
+		    // Función para preparar el formulario para nueva entrada
+		    function prepararParaNuevo() {
+		        form.reset();
+		        const inputId = document.getElementById('id_habitat');
+		        if (inputId) {
+		            inputId.remove();
+		        }
+		        
+		        // Habilitar solo el botón Agregar
+		        btnAgregar.disabled = false;
+		        btnModificar.disabled = true;
+		        btnEliminar.disabled = true;
+		    }
+		    
+		    // Botones de editar en la tabla
+		    document.querySelectorAll('.btn-warning.btn-sm').forEach(boton => {
+		        boton.addEventListener('click', (e) => {
+		            e.preventDefault();
+		            const fila = boton.closest('tr');
+		            
+		            // Obtener datos
+		            const id = fila.cells[0].innerText.trim();
+		            const nombre = fila.cells[1].innerText.trim();
+		            const continente = fila.cells[2].innerText.trim();
+		            
+		            // Rellenar formulario
+		            document.getElementById('nombre').value = nombre;
+		            document.getElementById('continente').value = continente;
+		            
+		            // Manejar ID (usando campo oculto)
+		            let inputId = document.getElementById('id_habitat');
+		            if (!inputId) {
+		                inputId = document.createElement('input');
+		                inputId.type = 'hidden';
+		                inputId.name = 'id_habitat';
+		                inputId.id = 'id_habitat';
+		                form.appendChild(inputId);
+		            }
+		            inputId.value = id;
+		            
+		            // Configurar botones
+		            btnAgregar.disabled = true;
+		            btnModificar.disabled = false;
+		            btnEliminar.disabled = false;
+		            
+		            // Scroll al formulario
+		            document.querySelector('.form-container').scrollIntoView({behavior: 'smooth'});
+		        });
+		    });
+		    
+		    // Botones de eliminar en la tabla
+		    document.querySelectorAll('.btn-danger.btn-sm').forEach(boton => {
+		        boton.addEventListener('click', (e) => {
+		            e.preventDefault();
+		            const fila = boton.closest('tr');
+		            const id = fila.cells[0].innerText.trim();
+		            const nombre = fila.cells[1].innerText.trim();
+		            
+		            if (confirm(`¿Estás seguro de que deseas eliminar el hábitat "${nombre}" (ID: ${id})?`)) {
+		                window.location.href = `/cuidadores/eliminarhabitat/${id}`;
+		            }
+		        });
+		    });
+
+		    
+		    // Inicializar estado del formulario
+		    prepararParaNuevo();
+		});
+	</script>
+</body>
+
+</html>

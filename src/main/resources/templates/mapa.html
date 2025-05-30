@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/2373/2373849.png">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <title>ZooKora | Mapa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Winky Rough", 'Segoe UI';
+        }
+
+        .fondo {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fondo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .titulo-contenedor {
+            position: absolute;
+            background-color: #a3e4d7;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .titulo-contenedor h1 {
+            font-size: 3rem;
+            font-family: 'Denk One', 'Segoe UI';
+            color: #FFFFFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .mapa-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .descripcion {
+            margin: 20px 0;
+            font-size: 1.2rem;
+            color: #333;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Estilos para el carrusel */
+        .carrusel {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 3px solid rgb(0, 128, 128);
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .carrusel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carrusel-item {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carrusel-img {
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .carrusel-img:hover {
+            transform: scale(1.01);
+        }
+
+        .carrusel-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .carrusel-btn {
+            background-color: #a3e4d7;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 0 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .carrusel-btn:hover {
+            background-color: #76d7c4;
+        }
+
+        .carrusel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .indicator.active {
+            background-color: #a3e4d7;
+        }
+
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .modal-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #a3e4d7;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .modal-nav:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev-modal {
+            left: 20px;
+        }
+
+        .next-modal {
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:insert="fragments/menu::menu-principal" class="sidebar"></div>
+
+    <div class="fondo">
+        <img src="https://www.shutterstock.com/image-photo/serene-blurred-landscape-featuring-lush-260nw-2605137311.jpg" alt="fondo">
+        <div class="titulo-contenedor">
+            <h1>MAPA DEL ZOOLÓGICO</h1>
+        </div>
+    </div>
+
+    <div class="mapa-container">
+        <p class="descripcion">Encuentra todas las áreas y exhibiciones de nuestro zoológico.. 🌿🐾</p>
+        
+        <div class="carrusel">
+            <div class="carrusel-inner">
+                <div class="carrusel-item">
+                    <img th:src="@{/imagenes/mapazoo.png}" alt="Mapa del Zoológico" class="carrusel-img" onclick="openModal(0)">
+                </div>
+                <div class="carrusel-item">
+                    <img th:src="@{/imagenes/simbologiazoo.png}" alt="Simbología del Mapa" class="carrusel-img" onclick="openModal(1)">
+                </div>
+            </div>
+            
+            <div class="carrusel-controls">
+                <button class="carrusel-btn prev-btn"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <button class="carrusel-btn next-btn">Siguiente <i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="carrusel-indicators">
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para imagen en grande -->
+    <div id="imageModal" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <span class="modal-nav prev-modal" onclick="navigateModal(-1)">&#10094;</span>
+        <span class="modal-nav next-modal" onclick="navigateModal(1)">&#10095;</span>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-img" src="" alt="Imagen ampliada">
+        </div>
+    </div>
+
+    <footer th:insert="fragments/footer::pie-pagina"></footer>
+
+    <script>
+        // Variables para el carrusel
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carrusel-item');
+        const totalItems = items.length;
+        const carruselInner = document.querySelector('.carrusel-inner');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        // Variables para el modal
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        let modalIndex = 0;
+        const carruselImages = document.querySelectorAll('.carrusel-img');
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            initCarrusel();
+            initModal();
+        });
+
+        function initCarrusel() {
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            
+            // Botón siguiente
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarrusel();
+            });
+            
+            // Botón anterior
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarrusel();
+            });
+            
+            // Indicadores
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    currentIndex = index;
+                    updateCarrusel();
+                });
+            });
+        }
+
+        function updateCarrusel() {
+            carruselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Actualizar indicadores
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        function initModal() {
+            // Asignar eventos a todas las imágenes del carrusel
+            carruselImages.forEach((img, index) => {
+                img.addEventListener('click', () => openModal(index));
+            });
+            
+            // Cerrar modal al hacer clic fuera de la imagen
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Cerrar con tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        }
+
+        function openModal(index) {
+            modalIndex = index;
+            modal.style.display = 'block';
+            modalImg.src = carruselImages[index].src;
+            document.body.style.overflow = 'hidden'; // Evitar scroll
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        function navigateModal(direction) {
+            modalIndex = (modalIndex + direction + totalItems) % totalItems;
+            modalImg.src = carruselImages[modalIndex].src;
+        }
+    </script>
+</body>
+</html>

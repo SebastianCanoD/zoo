@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/5809/5809416.png">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+	<title>ZooKora | Especies</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Winky Rough", 'Segoe UI';
+		}
+
+		.fondo {
+			position: relative;
+			width: 100%;
+			height: 250px;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.fondo img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: top;
+		}
+
+		.titulo-contenedor {
+			position: absolute;
+			background-color: #3bca6a;
+			padding: 10px 20px;
+			text-align: center;
+		}
+
+		.titulo-contenedor h1 {
+			font-size: 3rem;
+			font-family: 'Denk One', 'Segoe UI';
+			color: #FFFFFF;
+		}
+
+		.buscador {
+			margin: 30px auto 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.buscador input[type="text"] {
+			padding: 10px 15px;
+			width: 300px;
+			border-radius: 20px;
+			border: 2px solid #1d8f23;
+			font-size: 1rem;
+			outline: none;
+			transition: 0.3s ease;
+		}
+
+		.buscador input[type="text"]:focus {
+			box-shadow: 0 0 5px #41961f;
+		}
+
+		.input-contenedor {
+			position: relative;
+			display: inline-block;
+		}
+
+		.input-contenedor i {
+			position: absolute;
+			left: 15px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: rgb(141, 228, 141);
+			font-size: 1rem;
+		}
+
+		.input-contenedor input[type="text"] {
+			padding: 10px 15px 10px 40px;
+			width: 300px;
+			border-radius: 20px;
+			border: 2px solid #2aa02a;
+			font-size: 1rem;
+			outline: none;
+			transition: 0.3s ease;
+		}
+
+		.especie-contenedor {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+			padding: 30px;
+		}
+
+		.especie-card {
+			width: 300px;
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+			background-color: #ffffff;
+			transition: transform 0.3s ease;
+		}
+
+		.especie-card:hover {
+			transform: scale(1.03);
+		}
+
+		.especie-card img {
+			width: 100%;
+			height: 220px;
+			object-fit: cover;
+		}
+
+		.especie-categoria {
+		    text-align: center;
+		    color: #ffffff;
+		    padding: 10px 0;
+		    font-size: 1.2rem;
+		    font-family: 'Outfit', sans-serif;
+		}
+
+		.especie-categoria.mamífero { background-color: #dd9f41; }
+		.especie-categoria.reptil { background-color: #63561c; }
+		.especie-categoria.ave { background-color: #bf41e6; }
+		.especie-categoria.pez { background-color: #35bdb6; }
+		.especie-categoria.anfibio { background-color: #35bd57; }
+		.especie-categoria.invertebrado { background-color: #bd4535; }
+		.especie-categoria.otro { background-color: #ccc; }
+	</style>
+</head>
+
+<body>
+    <div th:insert="fragments/menu::menu-principal" class="sidebar"></div>
+
+    <div class="fondo">
+        <img src="https://www.sostenibilidad.com/media/394680/animales-peligro-extincion-jirafa.jpg?anchor=center&mode=crop&width=420&height=320&rnd="
+            alt="fondo">
+        <div class="titulo-contenedor">
+            <h1>ESPECIES</h1>
+        </div>
+    </div>
+	
+	<form action="/buscarEspecie" method="get">
+		<div class="buscador">
+			<div class="input-contenedor" style="display: flex; align-items: center;">
+				<button type="submit"
+					style="background: none; border: none; cursor: pointer; padding: 0; margin-right: 5px;">
+					<i class="fas fa-search"></i>
+				</button>
+				<input type="text" name="nombre" placeholder="Buscar especie...🐾"
+					style="font-family: 'Segoe UI', sans-serif;">
+			</div>
+		</div>
+	</form>
+
+    <div class="especie-contenedor">
+        <div th:each="especie : ${especies}" class="especie-card"> 
+            <img th:src="@{/imagenes/{imagen}(imagen=${especie.imagen})}" alt="especie">
+            <div class="especie-categoria" th:classappend="|${#strings.toLowerCase(especie.clase)}|">
+                <span th:text="${especie.clase}">Nombre especie</span>
+            </div>
+        </div>
+    </div>
+
+    <footer th:insert="fragments/footer::pie-pagina"></footer>
+</body>
+
+</html>

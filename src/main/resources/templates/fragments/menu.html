@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Menu</title>
+</head>
+
+<body>
+	<nav th:fragment="menu-principal">
+	<style>
+* {
+	font-family: "Winky Rough", 'Segoe UI';
+}
+
+.menu-header {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 15px;
+	z-index: 100;
+}
+
+.menu-nav {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 15px; /* Espacio entre elementos */
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropbtn {
+	background-color: rgba(255, 255, 255, 0.411);
+	border: none;
+	color: rgb(128, 103, 66);
+	padding: 10px 15px;
+	font-size: 1.5rem;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.dropbtn:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	min-width: 150px;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: white;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	font-family: 'Outfit', sans-serif;
+}
+
+.dropdown-content a:hover {
+	background-color: #fcb54b;
+	color: black;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.login-icon {
+    background-color: rgba(255, 255, 255, 0.411);
+    color: rgb(128, 103, 66);
+    padding: 10px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    position: relative;
+}
+
+.login-icon:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+.login-icon::after {
+    content: "Iniciar sesión";
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    transform: translateX(50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 5px;
+}
+
+.login-icon:hover::after {
+    opacity: 1;
+}
+</style>
+		<header class="menu-header">
+			<nav class="menu-nav">
+				<!-- Nuevo icono de login -->
+				<a href="/login" class="login-icon" title="Iniciar sesión">
+					<i class="fas fa-user"></i>
+				</a>
+				
+				<!-- Menú desplegable existente -->
+				<div class="dropdown">
+					<button class="dropbtn">
+						MENÚ <i class="fas fa-bars"></i>
+					</button>
+					<div class="dropdown-content">
+						<a href="/inicio">Inicio</a> 
+						<a href="/animales">Animales</a> 
+						<a href="/habitats">Habitats</a> 
+						<a href="/especies">Especies</a> 
+						<a href="/cuidadores">Cuidadores</a> 
+						<a href="/mapa">Mapa</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+	</nav>
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/2093/2093797.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=Honk&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Denk+One&family=Honk&family=Luckiest+Guy&family=National+Park:wght@200..800&family=Outfit:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <title>ZooKora | Inicio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Winky Rough", 'Segoe UI';
+        }      
+    
+        .fondo {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fondo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: bottom;
+        }
+
+        .titulo-contenedor {
+            position: absolute;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .titulo-contenedor h1 {
+            font-size: 6rem;
+            font-family: 'Luckiest Guy', 'Segoe UI';
+            color: #ffffff;
+            text-shadow: 2px 4px 8px rgb(173, 171, 171);
+            -webkit-text-stroke: 0.1px rgb(15, 15, 15);
+        }
+
+        .input-contenedor {
+            position: relative;
+            display: inline-block;
+        }
+
+        .input-contenedor i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: orange;
+            font-size: 1rem;
+        }
+
+        .input-contenedor input[type="text"] {
+            padding: 10px 15px 10px 40px;
+            width: 300px;
+            border-radius: 20px;
+            border: 2px solid #fcb54b;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s ease;
+        }       
+
+        .menu-horizontal {
+            background-color: #9b8565;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-horizontal nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .menu-horizontal a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-family: 'National Park', sans-serif;
+        }
+
+        .menu-horizontal a:hover {
+            background-color: #fcb54b;
+            color: #5a3907;
+            transform: translateY(-2px);
+        }
+
+        .informacion-zoologico {
+            font-family: "Winky Sans", sans-serif;
+            background-color: #f8f8f8;
+            padding: 40px 10px;
+            text-align: justify;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .informacion-zoologico h2 {
+            font-family: 'Winky Rough', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .informacion-zoologico p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .informacion-zoologico img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .informacion-zoologico .imagenes {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .informacion-zoologico .imagenes div {
+            width: 30%;
+        }
+
+        .informacion-zoologico .imagenes img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Estilos para los contenedores estéticos */
+        .contenedores-esteticos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+            padding: 40px 10px;
+            background-color: #f1f1f1;
+        }
+
+        .contenedor-categoria {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contenedor-categoria:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .contenedor-categoria i {
+            font-size: 3rem;
+            color: #d88303;
+            margin-bottom: 15px;
+        }
+
+        .contenedor-categoria h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .contenedor-categoria p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .btn-ver-mas {
+            display: inline-block;
+            background-color: #c9913c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-ver-mas:hover {
+            background-color: #ff9f0f9f;
+        }
+
+        .seccion-dudas {
+            background-color: #f8f4e8;
+            padding: 40px 20px;
+            margin: 30px auto;
+            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .seccion-dudas h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #5a3907;
+            margin-bottom: 30px;
+            font-family: 'National Park', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .pregunta {        
+            position: relative;
+            margin-bottom: 25px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #fcb54b;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding-top: 50px;
+        }
+        
+        .pregunta-imagen {
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fcb54b;
+            background-color: white;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .pregunta h3 {
+            color: #ce9238;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-family: "Winky Rough";
+        }
+        
+        .pregunta p {
+            color: #333;
+            padding: 5px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:insert="~{fragments/menu::menu-principal}" class="sidebar"></div>
+    <div class="fondo">
+        <img src="https://bunny-wp-pullzone-szblh4ncqp.b-cdn.net/wp-content/uploads/mexico//2024/01/Green-White-Simple-Bold-Top-5-Crypto-Blockchain-Youtube-Thumbnail-55.png"
+            alt="fondo">
+        <div class="titulo-contenedor">
+            <h1>ZooKora</h1>
+        </div>
+    </div>
+
+    <div class="menu-horizontal">
+        <nav>
+            <a href="/inicio">Inicio - ⛩️</a>
+            <a href="/animales">Animales - 🦁</a>
+            <a href="/habitats">Habitats - 🏞️</a>
+            <a href="/especies">Especies - 🐾</a>
+            <a href="/cuidadores">Cuidadores - 👥</a>
+            <a href="/mapa">Mapa - 🗺️</a>
+        </nav>
+    </div>
+
+    <!-- Nueva sección con información -->
+    <div class="informacion-zoologico">
+        <h2>Bienvenidos a ZooKora !!! 🤩</h2>
+        <p>ZooKora es un zoológico único que ofrece una experiencia increíble para toda la familia. Nos enorgullece
+            albergar una amplia variedad de animales de diversas especies, cada uno de ellos habitando en espacios
+            diseñados para imitar su hábitat natural.</p>
+        <p>Desde majestuosos felinos hasta exóticos reptiles, el zoológico ZooKora ofrece un lugar seguro y educativo
+            para que los visitantes aprendan sobre la fauna y flora que habita nuestro planeta. A lo largo de su
+            recorrido, podrá observar animales en ambientes cuidadosamente diseñados que aseguran su bienestar y el de
+            las especies.</p>
+
+        <div class="imagenes">
+            <div>
+                <img src="https://oem.com.mx/elsoldeacapulco/img/17178950/1665170256/BASE_LANDSCAPE/480/zoo1.webp" alt="Imagen Zoológico 1">
+            </div>
+            <div>
+                <img src="https://spanish.xinhuanet.com/photo/2020-11/16/139518083_16054479886861n.jpg"
+                    alt="Imagen Zoológico 2">
+            </div>
+            <div>
+                <img src="https://almomento.mx/wp-content/uploads/2023/04/Ft35CrdXgAALIjv.jpeg" alt="Imagen Zoológico 3">
+            </div>
+        </div>
+    </div>    
+
+    <section class="seccion-dudas">
+        <h2 style="font-family: Winky Rough;">¿Tienes Dudas?</h2>
+        
+        <div class="pregunta">
+            <img src="https://st4.depositphotos.com/24038622/27063/v/950/depositphotos_270637846-stock-illustration-brown-bag-lunch-cartoon-illustration.jpg" alt="comida" class="pregunta-imagen">
+            <h3>¿Puedo ingresar al zoológico con..?</h3> 
+            <p>Se puede ingresar al parque con agua natural, fresca o de sabor y, con todo tipo de alimentos que no vengan en envases de vidrio.<br>No se permiten refrescos,ni jugos embotellados..</p>
+        </div>
+        
+        <div class="pregunta">
+            <img src="https://img.freepik.com/vector-premium/dibujo-dibujos-animados-fotografo_29937-8167.jpg?w=360" alt="camara" class="pregunta-imagen">
+            <h3>¿Puedo usar cámara fotográfica?</h3>
+            <p>Se permite hacer uso de cámara fotográfica en cualquier parte del zoológico mientras se respeten las vallas de seguridad y no se moleste a los animales.</p>
+        </div>
+        
+        <div class="pregunta">
+            <img src="https://png.pngtree.com/png-clipart/20210308/original/pngtree-children-little-couple-cartoon-hand-drawn-png-image_5776479.jpg" alt="boleto" class="pregunta-imagen">
+            <h3>¿Los menores de 2 años pagan boleto?</h3>
+            <p>Los menores de 2 años no pagan boleto de ingreso, ni ningún atractivo. <br>Los niños de 3 a 11 años pagan boleto de NIÑO. <br>De los 12 años en adelante se paga boleto de ADULTO.</p>
+        </div>
+    </section>
+
+    <!-- Nueva sección con contenedores estéticos -->
+    <div class="contenedores-esteticos">
+        <div class="contenedor-categoria">
+            <i class="fas fa-paw"></i>
+            <h3>Animales</h3>
+            <p>Descubre la diversidad de especies que habitan en ZooKora. <br><br><strong>¡Haz un recorrido visual por nuestra galería!</strong></p>
+            <a href="/animales" class="btn-ver-mas">Ver más</a>
+        </div>
+
+        <div class="contenedor-categoria">
+            <i class="fab fa-facebook"></i>
+            <h3>Redes Sociales</h3>
+            <p>Síguenos en nuestra página de facebook para mantenerte al tanto de las últimas noticias y eventos.</p>
+            <a href="https://www.facebook.com/zoologico.zoochilpan/?locale=es_LA" target="_blank"
+                class="btn-ver-mas">Visita nuestra página</a>
+        </div>
+
+		<div class="contenedor-categoria">
+		    <i class="fas fa-map-marker-alt"></i>
+		    <h3>Visítanos</h3>
+		    <p>Estamos ubicados en Sta. Cruz, Jose Lopez Portillo 39074 Chilpancingo de los Bravo, Gro.</p>
+		    <a href="https://www.google.com/maps/place/Zool%C3%B3gico+Zoochilpan/@17.5562868,-99.5118478,17z/data=!3m1!4b1!4m6!3m5!1s0x85cbec8c633d0d97:0x65928a53f4337ce2!8m2!3d17.5562869!4d-99.5069769!16s%2Fg%2F1tj3ldvn?hl=es_LA&entry=ttu&g_ep=EgoyMDI1MDQyNy4xIKXMDSoASAFQAw%3D%3D"
+		        target="_blank" class="btn-ver-mas">Ver Ubicación 📍</a>
+		</div>
+
+        <div class="contenedor-categoria">
+            <i class="fas fa-user-tie"></i>
+            <h3>Cuidadores</h3>
+            <p>Conoce a las personas dedicadas al cuidado y bienestar de nuestros animales. <br><br><strong>Ellos son el corazón de ZooKora.</strong></p>
+            <a href="/cuidadores" class="btn-ver-mas">Ver más</a>
+        </div>
+        
+    </div>
+
+	<footer th:insert="~{fragments/footer::pie-pagina}"></footer>
+</body>
+
+</html>
