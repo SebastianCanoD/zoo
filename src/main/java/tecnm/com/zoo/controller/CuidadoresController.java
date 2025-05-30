@@ -125,14 +125,14 @@ public class CuidadoresController {
 	public String gestionEspecies(Model model) {
 		List<Especies> listaEspecies = serviceEspecies.buscarEspecies();
 		model.addAttribute("especies", listaEspecies);
-		return "/cuidador/especiescuidador";
+		return "cuidador/especiescuidador";
 	}
 
 	@GetMapping("/habitatscuidador")
 	public String gestionHabitats(Model model) {
 		List<Habitats> listaHabitats = serviceHabitats.buscarHabitats();
 		model.addAttribute("habitats", listaHabitats);
-		return "/cuidador/habitatscuidador";
+		return "cuidador/habitatscuidador";
 	}
 
 	@GetMapping("/saludcuidador")
@@ -157,7 +157,7 @@ public class CuidadoresController {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrió un error: " + error.getDefaultMessage());
 			}
-			return "/cuidador/saludcuidador";
+			return "cuidador/saludcuidador";
 		}
 
 		switch (accion) {
@@ -231,7 +231,7 @@ public class CuidadoresController {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrió un error: " + error.getDefaultMessage());
 			}
-			return "/cuidador/especiescuidador";
+			return "cuidador/especiescuidador";
 		}
 
 		switch (accion) {
@@ -266,7 +266,7 @@ public class CuidadoresController {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrio un error: " + error.getDefaultMessage());
 			}
-			return "/cuidador/habitatscuidador";
+			return "cuidador/habitatscuidador";
 		}
 
 		switch (accion) {
@@ -302,7 +302,7 @@ public class CuidadoresController {
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println("Ocurrió un error: " + error.getDefaultMessage());
 			}
-			return "/cuidador/alimentacioncuidador"; // Página de formulario con errores
+			return "cuidador/alimentacioncuidador"; // Página de formulario con errores
 		}
 
 		switch (accion) {
@@ -334,21 +334,21 @@ public class CuidadoresController {
 	public String eliminarHabitat(@PathVariable("id") Integer id_habitat, RedirectAttributes atributos) {
 		serviceHabitats.eliminarHabitat(id_habitat);
 		atributos.addFlashAttribute("msg", "Hábitat eliminada correctamente. 😊");
-		return "/cuidador/iniciocuidador";
+		return "cuidador/iniciocuidador";
 	}
 
 	@GetMapping("/eliminaralimentacion/{id}")
 	public String eliminarAlimentacion(@PathVariable("id") Integer id_alimentacion, RedirectAttributes atributos) {
 		serviceAlimentacion.eliminarAlimentacion(id_alimentacion);
 		atributos.addFlashAttribute("msg", "Alimentación eliminada correctamente. 😊");
-		return "/cuidador/iniciocuidador";
+		return "cuidador/iniciocuidador";
 	}
 
 	@GetMapping("/eliminarespecie/{id}")
 	public String eliminarEspecie(@PathVariable("id") Integer id_especie, RedirectAttributes atributos) {
 		serviceEspecies.eliminarEspecie(id_especie);
 		atributos.addFlashAttribute("msg", "Especie eliminada correctamente. 😊");
-		return "/cuidador/iniciocuidador";
+		return "cuidador/iniciocuidador";
 	}
 
 	@PostMapping("/eliminaranimal/{id}")

@@ -64,7 +64,7 @@ public class AdminController {
 	public String mostrarUsuarios(Model model) {
 		model.addAttribute("usuarios", serviceUsuarios.buscarUsuarios());
 		model.addAttribute("nuevoUsuario", new Usuarios());
-		return "/admin/usuariosadmin";
+		return "admin/usuariosadmin";
 	}
 
 	@PostMapping("/guardarUsuario")
@@ -77,7 +77,7 @@ public class AdminController {
 	public String editarUsuario(@PathVariable("id") int id_usuario, Model model) {
 		model.addAttribute("nuevoUsuario", serviceUsuarios.buscarPorId(id_usuario));
 		model.addAttribute("usuarios", serviceUsuarios.buscarUsuarios());
-		return "/admin/usuariosadmin";
+		return "admin/usuariosadmin";
 	}
 
 	@GetMapping("/eliminarUsuario/{id}")
@@ -96,6 +96,6 @@ public class AdminController {
 		model.addAttribute("alimentacionList", alimentacionList);
 		model.addAttribute("visitanteList", visitanteList);
 
-		return "/admin/reportesadmin";
+		return "admin/reportesadmin";
 	}
 }

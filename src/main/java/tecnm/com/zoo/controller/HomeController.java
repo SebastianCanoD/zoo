@@ -32,7 +32,7 @@ public class HomeController {
 	@Autowired
 	private EspeciesService serviceEspecies;
 
-	@GetMapping("/inicio")
+	@GetMapping("/")
 	public String mostrarInicio(Model model) {
 
 		return "iniciozoo";
